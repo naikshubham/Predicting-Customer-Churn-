@@ -57,6 +57,107 @@ plt.show()
 
 - From the plot,it looks like as far as predicting churn goes it does not matter whether or not a customer had an international plan.
 
+### Data Preprocessing for modelling
+- Some assumptions that the model make : **that the features are normally distributed** , **that the features are on the same scale**
+- Certain ML algorithms make assumptions about the data. If the features in our dataset do not meet these assumptions, then the results of the model won't be reliable.
+- That's why the data-preprocessing stage is so critical.
+
+#### Data-types
+- Many ML algorithms so accept numeric datatypes.So if any of the features are categorical, they will need to be first encoded numerically.
+- We can look at the data types in the telco Dataframe using its `dtype` attribute.Numeric columns have datatypes as int64 or float64 while any columns that includes text are encoded as object.
+
+#### Encoding binary features
+- Some features have two values `yes` and `no`, to encode them numerically we can use `no` as `0` & `yes` as `1`, using either **`replace()`** method or scikit-learn's LabelEncoder function.
+
+```python
+telco['Intl_Plan'].replace({'no':0, 'yes':1})
+
+# or
+
+from sklearn.preprocessing import LabelEncoder
+
+LabelEncoder().fit_transform(telco['Intl_Plan'])
+```
+- The `State` feature is a bit more complex to represent numerically, because there are so many states. We can assign a number to each state ` 0 for Kansas`, `1 for Ohio`, `2 for New Jersey` and so on.
+- But assigning arbitary numbers like this is dangerous, **as it implies some form of ordering in the states**. This would make sense for a feature that had categories like 'low', 'medium', 'high', but in this case it doesnt make sense to order states, and doing so would make model less effective.
+- Instead, we can encode states using **`one hot encoding`**. This creates new binary features.
+
+#### Feature scaling
+- Another imp preprocessing step is feature scaling. Most models require features to be on the same scale, but this is rarely true in case of real world data.
+- In our dataset, the `Intl_Calls` feature ranges from 0 to 20, while the `Night_Mins` feature ranges from 23 to 395.
+- So we need to rescale our data and ensure all our features are on the same scale.We'll do this using a process known as **`standardization`**, which centers the distribution around the mean of the data and calculates the number of standard deviations away from the mean each point is.
+
+```python
+from sklearn.preprocessing import StandardScaler
+
+df = StandarScaler().fit_transform(df)
+```
+
+### Feature selection and engineering
+- Datasets often have features that provide no predictive power and need to be dropped prior to modeling. Features that can be dropped include unique identifiers such as phone numbers, social security numbers and account numbers.
+
+#### Dropping correlated features
+- Features that are highly correalted with other features can also be dropped, **as they provide no additional information to the model**.
+- The **.corr()** method allows us to explore the correlation between the features in the dataset. In our dataset, (Day_Mins, Eve_Mins, Night_Mins and Intl_Mins) are highly correlated with (Day_Charge, Eve_Charge, Night_Charge and Intl_Charge) respectively.
+- Intutively, it makes sense that these features should be correlated, and from modeling standpoint, we can improve the performance of our models by removing these redundant features.
+- This process of choosing which features to use in our model is known as **`feature selection`**. Besides selecting features, we often need to create new features to help improve model performance. This is known as **`feature engineering`**
+- Consulting with the business and subject matter experts can lead to additional features, and should be a crucial step for every data science workflow. Together with feature selection, feature engineering is a critical step that can add a lot of value to your final model.
+
+#### Examples of feature engineering
+- One example of a new feature we could create is `Total Minutes`, which combines Day Minutes, Evening Minutes, Night Minutes and International minutes. Or we can create a new feature that is the ratio between Minutes and Charge.
+
+```python
+telco['Day_Cost'] = telco['Day_Mins'] / telco['Day_Charge']
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
