@@ -110,7 +110,9 @@ df = StandarScaler().fit_transform(df)
 telco['Day_Cost'] = telco['Day_Mins'] / telco['Day_Charge']
 ```
 
-
+### Making Predictions
+- Goal is to predict whether or not customer will churn depending on various features.
+- 
 
 
 
