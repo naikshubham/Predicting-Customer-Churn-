@@ -111,8 +111,46 @@ telco['Day_Cost'] = telco['Day_Mins'] / telco['Day_Charge']
 ```
 
 ### Making Predictions
-- Goal is to predict whether or not customer will churn depending on various features.
-- 
+- Goal is to predict whether or not customer will churn depending on various features. Target : **`Churn`**, Supervised Machine Learning problem.
+- First we need to decide which model we want to use. This is often one of the most difficult questions faced by data scientists, and the answer often is, it depends.
+- For classification problems the good baseline model to begin with is logistic regression.If offers simplicity and interpretability, however it is not flexible enough to capture more complex relationsips in our dataset.
+- Random Forests are a good next step - they have high performance but offer limited interpretability. Support Vector Machines are another option.
+
+```python
+from sklearn.svm import SVC
+
+svc = SVC()
+
+svc.fit(telco[features], telco['target'])
+
+prediction = svc.predict(new_customer)
+print(prediction)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
