@@ -127,6 +127,31 @@ prediction = svc.predict(new_customer)
 print(prediction)
 ```
 
+### Evaluating Model performance
+
+#### Accuracy
+- One possible metric:accuracy : total num of correct predictions/total number of data points
+- Train on the training set and test using test set.
+
+```python
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(telco['data'], telco['Churn'], test_size=0.2, random_state = 42)
+
+from sklearn.svm import SVC
+svc= SVC()
+svc.fit(X_train, y_train)
+svc.predict(X_test)
+
+# compute accuracy
+svc.score(X_test, y_test)
+```
+
+- Random state argument allows us to specify a seed.Setting a seed ensures that our results are reproducible, as all splits will be same seed and will be identical.
+
+#### Improving our model
+- Overfitting : Model fits the training data too closely, and doesn't generalize well on unseen data.
+- Underfitting : Does not capture the patterns in the training data.
+- Need to find the right balance between overfitting and underfitting.
 
 
 
