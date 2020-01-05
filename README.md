@@ -153,6 +153,27 @@ svc.score(X_test, y_test)
 - Underfitting : Does not capture the patterns in the training data.
 - Need to find the right balance between overfitting and underfitting.
 
+### Model Metrics
+
+#### Imbalanced classes
+- In our churn datasets there are 6 times more non-churners as compared to churners. This might have an impact on the performance of the model, as it might always learn to predict the majority class(in this case that the customers will not churn). There are techniques like upsampling and downsampling that we can use to balance the classes.
+- When working with imbalanced classes, **`accuracy is not a very useful metric`**. If we were to build a classifier that **always predicted that a customer would not churn it would be very accurate(about 85% accurate in this case).** yet it would completely fail at identifying the customers who will actually churn. This creates the need for metrics that are more nuanced like **confusion matrix, precision and recall**
+- **Precision** : If our model had high precision, it would mean that there were **not many false positives**- that is, not many non-churners who were classified as churners(few false positives).
+- **Recall/Sensitivity** :(True positives/(True Positives + False Negatives)) A high recall in this case means that the model correctly classified most churners.
+- **Which metric we focus on optimizing often depends on the business case(use case).** 
+- **If the offers we make to keep potential churners is high in relation to the value of losing customers, we want our model to have high precision or minimize false positives. Conversely, if losing customers we didnt think would churn is more expensive than an offer to keep a customer that would not have churned than we want a high recall or minimize false negatives**
+- Both recall and precision are far more valuable than just looking at accuracy.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
