@@ -164,6 +164,90 @@ svc.score(X_test, y_test)
 - **If the offers we make to keep potential churners is high in relation to the value of losing customers, we want our model to have high precision or minimize false positives. Conversely, if losing customers we didnt think would churn is more expensive than an offer to keep a customer that would not have churned than we want a high recall or minimize false negatives**
 - Both recall and precision are far more valuable than just looking at accuracy.
 
+### Other model metrics
+The **receiver operating characteristics curve(ROC curve**), that allows us to visualize the performance of our classifer.
+
+#### Probability thresholds
+- Every prediction our classifer makes has an associated probability.By default in scikit-learn, if this probability is above 50%, then our model would predict the data point as belonging to the positive class, and if it is lower than 50%, it would predict the negative class. The default probabilty threshold here is 50%
+- What if we vary this threshold and for each threshold plot the model's TPR against the FPR, we get what is known as the **ROC curve**
+- This curve allows us to diagnose the performance of the model at different thresholds. Y-axis is the TPR and ranges from 0 to 1 and the X-axis is the FPR which also ranges from 0 to 1.
+- A perfect classifier will have a TPR of 1 and FPR of 0.This information can be used to extract another useful metric: **the area under the ROC curve, known as the AUC.**
+- A better performing model will have a large area under the curve
+
+<p align="center">
+  <img src="data/AUC.JPG" width="350" title="AUC">
+</p>
+
+- The ROC curve of a model that randomly guesses would be a random line, and the AUC would be 0.5
+
+<p align="center">
+  <img src="data/random_roc.JPG" width="350" title="ROC">
+</p>
+
+- Therefore, having an AUC of above 0.5 would be better then randomly guessing.While an AUC above 0.7 or 0.8 would indicate an well performing model.
+- Together with the ROC curve the AUC allows us to easily evaluate and compare the performance of different classifiers. Inorder to plot the ROC, we need to first calcuate the probabilities that our model generates for each data point.
+- scikit learn has a `predict_proba()` method for this purpose. Each column contains the probabilities for the respective target values.
+- Since our positive class is "1", we are interested in the second column, and we can select that as shown below
+
+```python
+logreg.predict_proba(X_test)[:,1]
+y_pred_prob = logreg.predict_proba(X_test)[:,1]
+```
+
+#### ROC curve in sklearn
+
+```python
+from sklearn.metrics import roc_curve
+
+fpr, tpr, thresholds = roc_curve(y_test, y_pred_prob)
+
+import matplotlib.pyplot as plt
+
+plt.plot(fpr, tpr)
+plt.xlabel("False positive rate")
+plt.ylabel("True positive rate")
+plt.plot([0, 1], [0, 1], "k--")
+plt.show()
+```
+- To calculate the AUC sklearn has `roc_auc_score` function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
