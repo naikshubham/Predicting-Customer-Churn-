@@ -212,6 +212,10 @@ plt.show()
 - To calculate the AUC sklearn has `roc_auc_score` function
 
 
+#### Precision-recall curve
+Another way to evaluate model performance is using a precision-recall curve, which shows the tradeoff between precision and recall for different thresholds.
+
+### Tuning model
 
 
 
