@@ -216,9 +216,20 @@ plt.show()
 Another way to evaluate model performance is using a precision-recall curve, which shows the tradeoff between precision and recall for different thresholds.
 
 ### Tuning model
+- Choose best hyperparameters that leads to a best performing model.
+- **Gridsearch** : is an bruteforce search to find the hyperparameter of interest. Essentially it tries a range of different hyperparameter values, fits model seperately using these different values, and then returns the hyperparameter that leads to the best model fit.
+- scikit-learns technique of GridSearch uses cross validation to ensure the model is tested on unseen data.
 
+#### Grid search in sklearn
 
-
+```python
+from sklearn.model_selection import GridSearchCV
+param_grid = {'n_estimators' : np.arange(10, 51)} # dict of hyperparameters
+clf_cv = GridSearchCV(RandomClassifier(), param_grid)
+clf_cv.fit(X, y)
+clf_cv.best_params_
+clf_cv.best_score_
+```
 
 
 
