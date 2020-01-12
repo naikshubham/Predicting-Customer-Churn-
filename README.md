@@ -231,6 +231,66 @@ clf_cv.best_params_
 clf_cv.best_score_
 ```
 
+### Feature Importances
+- Tree based methods such as Random forest allows us to calculate feature importances, which are scores representing how much each feature contributes to a prediction.
+- Visualizing these feature importances is an effective way to communicate results to stakeholders.It can inform which features are important in driving churn and which features can be removed from the model.
+
+#### Interpretability vs accuracy
+- Different models have different strengths and weaknesses.For e.g, deep learning techniques tends to perform better in many domains, but the neural networks that underlie these techniques are very hard to interpret.
+- In contrast, simpler techniques like logistic regression might not perform as well, but are easier to interpret, and this interpretability might be the difference between whether or not we buy-in from stakeholders, do we should'nt underestimate its importance.
+- The value of a churn model is not only in helping us identify which customers are at risk of churning, but also what the drivers of churn are.
+
+#### Random forest feature importances
+
+```python
+random_forest = RandomForestClassifer()
+random_forest.fit(X_train, y_train)
+random_forest.feature_importances_
+```
+
+### Adding New Features
+- Adding additional features or data sources are easy way to improve model performance.Customer touch points are important sources of data to incorporate in churn modeling workflow. These sources provide a 360 degree view of the customer and should be inluded in our list of features.
+- Data sources that we could incorporate into our model include: customer service call notes, web logs, email campaign, social networks, transcations and cell tower signal strength.Including these data sources can greatly improve model performance.
+
+#### Additonal churn features
+- We are doing this to potentially avoid underfitting by providing additional information to train the model with. Features that we will use are `Region code, Total charges, Total minutes, minutes per call, cost per call and total calls`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
